@@ -4,7 +4,10 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneLabel,
+  PropertyPaneLink,
+  PropertyPaneHorizontalRule
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'LinksWebPartStrings';
@@ -13,7 +16,6 @@ import { ILinksProps } from './components/ILinksProps';
 import { ILink, LinkTarget } from './components/ILink';
 
 import { PropertyFieldCollectionData, CustomCollectionFieldType } from '@pnp/spfx-property-controls/lib/PropertyFieldCollectionData';
-import { UIFabricIconOptions } from './UIFabricIconOptions';
 
 export interface ILinksWebPartProps {
   collectionData: ILink[];
@@ -75,6 +77,7 @@ export default class LinksWebPart extends BaseClientSideWebPart<ILinksWebPartPro
                   key: "collectionData",
                   label: strings.linkDataLabel,
                   panelHeader: strings.linkPanelHeader,
+                  panelDescription: `${strings.iconInformation} https://developer.microsoft.com/en-us/fabric#/styles/icons`,
                   manageBtnLabel: strings.manageLinksBtn,
                   value: this.properties.collectionData,
                   fields: [
@@ -93,8 +96,7 @@ export default class LinksWebPart extends BaseClientSideWebPart<ILinksWebPartPro
                     {
                       id: "icon",
                       title: strings.iconField,
-                      type: CustomCollectionFieldType.dropdown,
-                      options: UIFabricIconOptions
+                      type: CustomCollectionFieldType.fabricIcon
                     },
                     {
                       id: "group",
